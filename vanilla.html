@@ -1,0 +1,102 @@
+<!-- react 원리 -->
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <div id="root"></div>
+    </body>
+
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- react-dom : 모든 react element들을 HTML body에 둘 수 있게 함. -->
+
+    <!-- JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- babel : 브라우저가 읽을 수 있는 코드로 바꿈 -->
+
+    <script type="text/babel">
+        // 타입 정의
+        const root = document.getElementById("root")
+        // 생성하고자 하는 HTML태그와 똑같은 이름이어야 함.
+
+        // react js로 element 생성
+        const Title = ()=>(
+            <h3 id="title" onMouseEnter={()=> console.log("mouse enter")}>
+                Hello I'm a title
+            </h3>    
+        )
+        /*
+        ==
+        function Title(){
+            return(
+                <h3 id="title" onMouseEnter={()=> console.log("mouse enter")}>
+                    Hello I'm a title
+                </h3>
+                )
+            }
+        */
+        /*
+        const h3 = React.createElement(
+                "h3", 
+                // HTML 태그
+                {
+                    id: "titl  e", 
+                    onMouseEnter: ()=> console.log("mouse enter")
+                }, 
+                // property: id, class, style
+                //          {id: "sexy-h3", style: {color: "red"}} 
+                "Hello i am a h3"
+                // 내용(context)
+            )
+        */
+
+        const Button = ()=>(
+            <button 
+                style={{backgroundColor: "tomato"}} 
+                onClick={()=>console.log("I'm clicked")}
+            >
+                Click Me
+            </button>
+        )
+       /*
+        const btn = React.createElement(
+                "button", 
+                {
+                    onClick: ()=> console.log("I'm clicked"), 
+                    style: {backgroundColor: "tomato"}
+                }, 
+                "Click Me"
+            )
+        */
+
+
+       const Container = ()=>(
+            <div>
+                <Title /> 
+                <Button />
+            </div>
+                // 첫글자 반드시 대문자
+                // if 소문자 -> React, JSX가 HTML 태그라고 생각함
+       )
+        /*
+        const Container = (
+            <div>
+                <Title /> 
+                <Button />
+            </div>
+                  // 첫글자 반드시 대문자
+                  // if 소문자 -> React, JSX가 HTML 태그라고 생각함
+        )
+        */
+        // const container = React.createElement("div", null, [Title, Button])
+        // java script
+
+
+        // ReactDOM.render(h3, root)
+        // ReactDOM.render(container, root)
+        // ReactDOM.render(Container, root)
+        ReactDOM.render(<Container />, root)
+        // ReactDOM.createRoot(root).render()
+        // HTML
+    </script>
+</html>
