@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div id="root"></div>
+</body>
+
+<!-- react > event가 실행될 때 HTML의 요소 "UI 바뀐 부분"만 업데이트 -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root")
+
+    function App() {
+        // 자동 리랜더링
+        //      - state(counter)가 바뀌면(업데이트) React가 컴포넌트를 refresh(리랜더링)
+        //      - setState(setCounter): 이벤트 발생 시 변화를 주는 '함수'(-> counter 다시 저장)
+        //          React.useState('초기값')
+        //      '실제로 바뀌는 값' 판단, 리랜더링 -> 불필요한 리랜더링 제외
+        const [counter, setCounter] = React.useState(0)
+        /*
+        =
+            let counter = 0
+                첫번째 요소 : 초기값
+
+            function countUp(){
+
+            }
+                두번째 요소 : 값을 바꾸는 함수
+        */
+
+        const onClick = () => {
+            // counter = counter +1
+            // setCounter(counter+1)            // 1.
+            setCounter((current) => current + 1)    // 2. 현재 값 보장
+        }
+
+        return (
+            <div>
+                <h3>Total clicks : {counter}</h3>
+                <button onClick={onClick}>Click Me</button>
+            </div>
+        )
+    }
+
+    ReactDOM.render(<App />, root)
+
+</script>
+
+</html>
