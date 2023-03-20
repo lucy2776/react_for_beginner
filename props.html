@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body style="padding: 30px;">
+    <div id="root"></div>
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<!-- PropTypes 검사 -->
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+    const root = document.getElementById("root");
+
+    function Btn({ text, changeValue, fontSize = 12 }) {
+        // text :
+        //          object 
+        //          1번째 props
+        //          - btn함수 컴포넌트의 첫번째 인자를 오브젝트로부터 text를 받아냄
+
+        console.log(text, "was rendered")
+
+        return (
+            <button
+                onClick={changeValue}
+                style={{
+                    backgroundColor: "tomato",
+                    color: "white",
+                    padding: "10px 20px",
+                    border: 0,
+                    borderRadius: 10,
+                    fontSize
+                    // fontSize: text ? 18 : 16
+                }}>
+                {text}
+            </button>
+        )
+    }
+
+    Btn.propTypes = {
+        text: PropTypes.string,
+        fontSize: PropTypes.number
+    }
+    // PropType 이름: PropTypes.타입(.isRequired // 필수적)
+
+    // const MenorizedBtn = React.memo(Btn)
+
+    function App() {
+        const [value, setValue] = React.useState("Save Changes")
+
+        const changeValue = () => {
+            setValue("Revert Changes")
+        }
+
+        return (
+            <div>
+                <Btn text={value} changeValue={changeValue} fontSize={18} />
+                <Btn text="Continue" />
+            </div>
+        );
+        // HTML 태그 안 onClick -> 이벤트 리스너
+        // Btn(내 커스텀 컴포넌트) -> 하나의 prop 이름
+    }
+
+    ReactDOM.createRoot(root).render(<App />);
+
+</script>
+
+</html>
